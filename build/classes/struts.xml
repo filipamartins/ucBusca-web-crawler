@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- The core configuration file for the framework is the default (struts.xml) file
+and should reside on the classpath of the webapp (generally /WEB-INF/classes). -->
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+  <!-- devMode equals debug information and reload everything for every request -->
+  <constant name="struts.devMode" value="true" />
+  <constant name="struts.ui.theme" value="simple" />
+  <constant name="struts.action.excludePattern" value="/ws.*"/>
+  <package name="ucbusca" extends="struts-default">
+	
+	<default-action-ref name="index" />
+	
+	<global-results>
+		<result name="error">/error.jsp</result>
+	</global-results>
+
+	<!-- all exceptions not caught by the application will lead to error.jsp -->
+	<global-exception-mappings>
+		<exception-mapping exception="java.lang.Exception" result="error" />
+	</global-exception-mappings>
+
+	<!-- 'index' action leads to the view provided by index.jsp -->
+    <action name="index">
+      <result>/index.jsp</result>
+    </action>
+
+	<!-- 'register' action calls 'execute' in 'RegisterAction' -->
+    <action name="register" class="ucbusca.action.RegisterAction" method="execute">
+      <result name="success">/success.jsp</result>
+      <result name="input">/register.jsp</result>
+      <result name="fail">/register.jsp</result>
+    </action>
+    
+	<!-- 'login' action calls 'execute' in 'LoginAction' -->
+    <action name="login" class="ucbusca.action.LoginAction" method="execute">
+      <result name="success">/hey.jsp</result>
+        <result name="input">/login.jsp</result>
+      <result name="login">/index.jsp</result>
+      <result name="fail">/login.jsp</result>
+    </action>
+
+	<!-- 'logout' action calls 'execute' in 'LogoutAction' -->
+    <action name="logout" class="ucbusca.action.LogoutAction" method="execute">
+      <result name="success">/index.jsp</result>
+    </action>
+    
+    <!-- 'indexurl' action calls 'execute' in 'IndexUrlAction' -->
+    <action name="indexurl" class="ucbusca.action.UrlAction" method="executeIndexUrl">
+      <result name="success">/user.jsp</result>
+      <result name="fail">/user.jsp</result>
+    </action>
+    
+    
+    <!-- 'connections' action calls 'execute' in 'ConnectionsAction' -->
+    <action name="connections" class="ucbusca.action.UrlAction" method="executeConnections">
+      <result name="success">/connections.jsp</result>
+      <result name="fail">/user.jsp</result>
+    </action>
+    
+    <!-- '"promoteuser"' action calls 'execute' in 'PromoteUserAction' -->
+    <action name="promoteuser" class="ucbusca.action.PromoteUserAction" method="execute">
+      <result name="success">/user.jsp</result>
+      <result name="fail">/user.jsp</result>
+    </action>
+    
+    <!-- 'search' action calls 'execute' in 'SearchAction' -->
+    <action name="search" class="ucbusca.action.SearchAction" method="execute">
+      <result name="success">/results.jsp</result>
+       <result name="fail">/index.jsp</result>
+    </action>
+    
+     <!-- 'list' action calls 'execute' in 'ListAction' -->
+    <action name="list" class="ucbusca.action.ListAction" method="execute">
+      <result name="success">/user.jsp</result>
+    </action>
+    
+  </package>
+
+</struts>
